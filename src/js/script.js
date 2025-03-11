@@ -169,6 +169,19 @@ const select = {
             // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
             const option = param.options[optionId];
             console.log(optionId, option);
+
+            // chcecking if optionId inside of paramId  is in formData
+            if(formData[paramId] && formData[paramId].includes(optionId)){
+
+              //checking the price if we need to increse, decrese or do nothing
+              if (!option.default){
+                price += option.price;
+              }
+            } else {
+              if (option.default){
+                price -= option.price;
+              }
+            }
           }
         }
       
