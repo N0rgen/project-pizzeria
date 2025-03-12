@@ -97,6 +97,7 @@ const select = {
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper)
     }
 
     initAccordion(){
@@ -153,10 +154,10 @@ const select = {
       
         // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
         const formData = utils.serializeFormToObject(thisProduct.form);
-        console.log('formData', formData);
       
         // set price to default price
         let price = thisProduct.data.price;
+        
       
         // for every category (param)...
         for(let paramId in thisProduct.data.params) {
@@ -182,6 +183,20 @@ const select = {
                 price -= option.price;
               }
             }
+
+            const optionImage = thisProduct.imageWrapper.querySelector(`.${paramId}-${optionId}`);
+            if(optionImage){
+              
+              if(formData[paramId] && formData[paramId].includes(optionId)){
+
+                optionImage.classList.add(classNames.menuProduct.imageVisible);
+
+              }else{
+                
+                optionImage.classList.remove(classNames.menuProduct.imageVisible);
+
+              }
+            }
           }
         }
       
@@ -189,7 +204,6 @@ const select = {
         thisProduct.priceElem.innerHTML = price;
       }
     }
-  
 
   const app = {
     initMenu: function(){
