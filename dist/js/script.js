@@ -120,8 +120,6 @@
 
       menuContainer.appendChild(thisProduct.element);
 
-      
-
     }
 
     getElements(){
@@ -241,7 +239,6 @@
     addToCart(){
       const thisProduct = this;
 
-      
       app.cart.add(thisProduct.prepareCartProduct());
     }
 
@@ -360,6 +357,7 @@
 
       thisCart.dom.wrapper = element;
       thisCart.dom.toggleTrigger = element.querySelector(select.cart.toggleTrigger);
+      thisCart.dom.productList = element.querySelector(select.cart.productList);
     }
     initActions(){
       const thisCart = this;
@@ -370,8 +368,12 @@
       });
     }
     add(menuProduct){
-      // const thisCart = this;
+      const thisCart = this;
       console.log('adding product', menuProduct);
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
     
   }
