@@ -418,6 +418,14 @@
         price.innerHTML = thisCart.totalPrice;
       }
     }
+    remove(cartProduct){
+      const thisCart = this;
+
+      const indexOfProduct = thisCart.products.indexOf(cartProduct);
+      thisCart.products.splice(indexOfProduct, 1);
+      cartProduct.dom.wrapper.remove();
+      thisCart.update();
+    }
     
   }
 
